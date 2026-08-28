@@ -1,0 +1,21 @@
+# SQL Server Development Environment
+# NOTE: This requires Docker to be in Linux containers mode
+# Right-click Docker Desktop tray icon -> "Switch to Linux containers..."
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-server-dev
+    hostname: sql-server-dev
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=MyStr0ng!Pass#2024
+      - MSSQL_PID=Developer
+    volumes:
+      - sql_data:/var/opt/mssql
+    restart: unless-stopped
+
+volumes:
+  sql_data:
